@@ -1,0 +1,7 @@
+{
+  "name": "nestjs-microservice-playground",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r build"
+  }
+}
