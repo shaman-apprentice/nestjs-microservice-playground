@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { MathController } from './math.controller';
 import { LiteraryController } from './literary.controller';
+import { BirdWatchService } from './bird-watch.service';
 
 @Module({
   imports: [
@@ -19,12 +20,13 @@ import { LiteraryController } from './literary.controller';
         options: {
           port: 3002,
         }
-      }
+      },
     ])
   ],
   controllers: [
     MathController,
     LiteraryController,
+    BirdWatchService,
   ],
   providers: [],
 })

@@ -1,7 +1,8 @@
 packages:
   - 'rest-client'
   - 'literary-service'
-  - 'math-service/*'
+  - 'math-service'
+  - 'tweet-service'
 allowBuilds:
   '@nestjs/core': true
   unrs-resolver: true
