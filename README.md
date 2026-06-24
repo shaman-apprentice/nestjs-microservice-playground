@@ -16,3 +16,8 @@ Just quick notes of basic concepts and commands
 
 - Send msg: `@Inject("LITERARY_SERVICE") private literaryClient: ClientProxy` -> `this.literaryClient.send(pattern, data)` - returns an RxJs Observable
 - Response to msg: `@MessagePattern(pattern) responseToMsg(data)`
+
+## Kafka
+
+- Open kafka tools in docker: `docker exec -it kafka bash` - Kafka tools are in */opt/kafka/bin*
+  - `./kafka-topics.sh --create --topic bird-sound-events --bootstrap-server localhost:9092`
