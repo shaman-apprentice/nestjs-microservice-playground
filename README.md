@@ -2,6 +2,10 @@
 
 Just quick notes of basic concepts and commands
 
+## pnpm
+
+- Ensure workspace dep is pulled in: `pnpm add <name>@workspace:*`
+
 ## Microservices
 
 - [Microservices](https://docs.nestjs.com/microservices/basics)

@@ -1,0 +1,21 @@
+{
+  "name": "kafka-connection",
+  "version": "0.0.1",
+  "description": "Shared information for Kafka connection",
+  "author": "shaman-apprentice",
+  "private": "true",
+  "license": "UNLICENSED",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "clean": "rm -r dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

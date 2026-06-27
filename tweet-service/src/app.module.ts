@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
-import { BirdService } from './bird.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+
+import { bootstrapServer } from 'kafka-connection';
+
+import { BirdService } from './bird.service';
 
 @Module({
   imports: [
@@ -9,14 +12,17 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ClientsModule.register([
       {
         name: "TWEET_SERVICE",
-        transport: Transport.TCP,
+        transport: Transport.KAFKA,
         options: {
-          port: 3004,
+          client: {
+            clientId: "tweet-service",
+            brokers: [ bootstrapServer ],
+          },
         },
       },
     ])
   ],
   controllers: [],
-  providers: [BirdService],
+  providers: [ BirdService ],
 })
 export class AppModule {}

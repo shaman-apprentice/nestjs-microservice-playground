@@ -3,6 +3,7 @@ packages:
   - 'literary-service'
   - 'math-service'
   - 'tweet-service'
+  - 'kafka-connection'
 allowBuilds:
   '@nestjs/core': true
   unrs-resolver: true

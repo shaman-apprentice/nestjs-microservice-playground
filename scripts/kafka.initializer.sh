@@ -8,7 +8,7 @@ echo "Creating topics..."
   --bootstrap-server kafka:9092 \
   --create \
   --if-not-exists \
-  --topic example-topic \
+  --topic tweet \
   --partitions 1 \
   --replication-factor 1
 
