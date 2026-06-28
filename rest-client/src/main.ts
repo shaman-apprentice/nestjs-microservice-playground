@@ -1,15 +1,22 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { Transport } from '@nestjs/microservices';
+
+import { bootstrapServer } from 'kafka-connection';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.connectMicroservice({
-    transport: Transport.TCP,
+    transport: Transport.KAFKA,
     options: {
-      host: '0.0.0.0',
-      port: 3004,
+      client: {
+        brokers: [ bootstrapServer ],
+      },
+      consumer: {
+        groupId: "rest-client"
+      }
     },
   });
 
