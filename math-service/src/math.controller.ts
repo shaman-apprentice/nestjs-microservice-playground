@@ -3,7 +3,8 @@ import { MessagePattern } from "@nestjs/microservices";
 
 @Controller()
 export class MathController {
-  @MessagePattern({ cmd: "sum" })
+
+  @MessagePattern("get.sum")
   sum(data: number[]): number {
     return data.reduce((sum, a) => sum + a, 0);
   }

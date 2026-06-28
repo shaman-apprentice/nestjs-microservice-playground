@@ -6,7 +6,7 @@ import { MessagePattern } from "@nestjs/microservices";
 export class PoemController {
   constructor(private poemService: PoemService) {}
 
-  @MessagePattern({ cmd: "getPoem" })
+  @MessagePattern("get.poem")
   async getPoem(data: {}): Promise<string> {
     return this.poemService.getPoem();
   }

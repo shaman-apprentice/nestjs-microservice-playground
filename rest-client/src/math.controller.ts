@@ -1,16 +1,18 @@
-import { Controller, Get, Inject } from "@nestjs/common";
-import { ClientProxy } from "@nestjs/microservices";
-import { firstValueFrom } from "rxjs";
+import { Controller, Get, Inject, OnModuleInit } from "@nestjs/common";
+import type { ClientKafkaProxy } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
 @Controller("math")
-export class MathController {
-  constructor(@Inject("MATH_SERVICE") private mathClient: ClientProxy) {}
+export class MathController implements OnModuleInit {
+  constructor(@Inject("KAFKA") private kafkaClient: ClientKafkaProxy) {}
 
-  // TODO add parameters
+  onModuleInit() {
+    this.kafkaClient.subscribeToResponseOf("get.sum");
+  }
+
   @Get("sum")
-  async getSum(): Promise<number> {
-    const pattern = { cmd: "sum" };
+  getSum(): Observable<number> {
     const payload = [ 1, 2, 3 ];
-    return firstValueFrom(this.mathClient.send(pattern, payload));
+    return this.kafkaClient.send("get.sum", payload);
   }
 }

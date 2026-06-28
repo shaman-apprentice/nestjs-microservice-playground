@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+
+import { bootstrapServer } from 'kafka-connection';
+
 import { MathController } from './math.controller';
 import { LiteraryController } from './literary.controller';
 import { BirdWatchService } from './bird-watch.service';
@@ -8,18 +11,17 @@ import { BirdWatchService } from './bird-watch.service';
   imports: [
     ClientsModule.register([
       {
-        name: 'MATH_SERVICE',
-        transport: Transport.TCP,
+        name: 'KAFKA',
+        transport: Transport.KAFKA,
         options: {
-          port: 3001,
-        }
-      },
-      {
-        name: 'LITERARY_SERVICE',
-        transport: Transport.TCP,
-        options: {
-          port: 3002,
-        }
+          client: {
+            clientId: 'rest-client',
+            brokers: [ bootstrapServer ],
+          },
+          consumer: {
+            groupId: 'rest-client',
+          },
+        },
       },
     ])
   ],

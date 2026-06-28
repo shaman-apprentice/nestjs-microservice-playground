@@ -1,14 +1,18 @@
-import { Controller, Get, Inject } from "@nestjs/common";
-import { ClientProxy } from "@nestjs/microservices";
-import { firstValueFrom } from "rxjs";
+import { Controller, Get, Inject, OnModuleInit } from "@nestjs/common";
+import type { ClientKafkaProxy } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
 @Controller("literary")
-export class LiteraryController {
-  constructor(@Inject("LITERARY_SERVICE") private literaryClient: ClientProxy) {};
+export class LiteraryController implements OnModuleInit {
+  constructor(@Inject("KAFKA") private kafkaClient: ClientKafkaProxy) {}
+  
+  onModuleInit() {
+    this.kafkaClient.subscribeToResponseOf("get.poem");
+  }
+;
 
   @Get("poem")
-  async getPoem(): Promise<string> {
-    const pattern = { cmd: "getPoem" };
-    return firstValueFrom(this.literaryClient.send(pattern, {}));
+  getPoem(): Observable<string> {
+    return this.kafkaClient.send("get.poem", {});
   }
 }
