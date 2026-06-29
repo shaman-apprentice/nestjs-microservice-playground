@@ -25,3 +25,12 @@ Just quick notes of basic concepts and commands
 
 - Open kafka tools in docker: `docker exec -it kafka bash` - Kafka tools are in */opt/kafka/bin*
   - `./kafka-topics.sh --create --topic bird-sound-events --bootstrap-server localhost:9092`
+
+## Docker / docker compose
+
+- Start only specific services: `docker compose up kafka kafka-init akhq`
+- Note, that *.dockerignore* file must be next to context root
+- See full build log: `docker compose build --progress=plain math-service`
+- Inspect created docker image: `nestjs-microservice-playground-math-service`
+- Note, that `docker compose up` does only rebuild docker images on *dockerfile* changes if `--build` is passed
+- See logs of a service: `docker compose logs <service-name>`

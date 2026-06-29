@@ -9,6 +9,10 @@ importers:
   .: {}
 
   kafka-connection:
+    dependencies:
+      '@types/node':
+        specifier: ^24.12.4
+        version: 24.12.4
     devDependencies:
       typescript:
         specifier: ^5.9.3

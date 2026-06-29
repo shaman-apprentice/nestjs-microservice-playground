@@ -49,3 +49,34 @@ services:
             local-kafka:
               properties:
                 bootstrap.servers: "kafka:9092"
+
+  rest-client:
+    depends_on:
+      kafka: { condition: service_healthy }
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+      args:
+        SERVICE_NAME: "rest-client"
+  literary-service:
+    depends_on:
+      kafka: { condition: service_healthy }
+    build:
+      context: .
+      args:
+        SERVICE_NAME: "literary-service"
+  math-service:
+    depends_on:
+      kafka: { condition: service_healthy }
+    build:
+      context: .
+      args:
+        SERVICE_NAME: "math-service"
+  tweet-service:
+    depends_on:
+      kafka: { condition: service_healthy }
+    build:
+      context: .
+      args:
+        SERVICE_NAME: "tweet-service"
